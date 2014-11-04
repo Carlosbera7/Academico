@@ -37,14 +37,14 @@ class Pessoa (models.Model):
 		return self.Nome
 		
 class Aluno (models.Model):
-	Tipo = models.ForeignKey(Pessoa,verbose_name="Pessoa",null=False)
+	Tipo = models.ForeignKey(Pessoa,verbose_name="Pessoa",null=True)
 	Matricula = models.CharField('Matricula',max_length=10,null=True)
 	
 	def __unicode__(self):
 		return "%s - %s" % (self.Tipo.Nome,self.Matricula)
 		
 class Cordenador (models.Model):
-	Tipo = models.ForeignKey(Pessoa,verbose_name="Pessoa",null=False)
+	Tipo = models.ForeignKey(Pessoa,verbose_name="Pessoa",null=True)
 	Cadastro = models.CharField('Cadastro',max_length=10,null=True)
 	
 	def __unicode__(self):
@@ -58,7 +58,7 @@ class Disciplina (models.Model):
 		return self.Nome
 		
 class Professor (models.Model):
-	Tipo = models.ForeignKey(Pessoa,verbose_name="Pessoa",null=False)
+	Tipo = models.ForeignKey(Pessoa,verbose_name="Pessoa",null=True)
 	Codigo = models.CharField('Codigo',max_length=10,null=True)
 	
 	def __unicode__(self):
@@ -70,8 +70,36 @@ class Periodo (models.Model):
 	def __unicode__(self):
 		return self.Nome
 		
-
+class Estrutura (models.Model):
+	Periodo = models.ForeignKey(Periodo,verbose_name="Periodo",null=True)
+	Disciplina = models.ForeignKey(Disciplina,verbose_name="Disciplina",null=True)
+	Nome = models.CharField('Estrutura',max_length=100,null=True)
 	
+	def __unicode__(self):
+		return "%s - %s - %s" % (self.Disciplina.Nome,self.Periodo.Nome,self.Nome)
+
+class Horario (models.Model):
+	Nome = models.CharField('Horario',max_length=10,null=True)
+	
+	def __unicode__(self):
+		return self.Nome
+		
+class EstruturaDisciplina (models.Model):
+	Estrutura = models.ForeignKey(Estrutura,verbose_name="Estrutura",null=True)
+	Periodo = models.ForeignKey(Periodo,verbose_name="Periodo",null=True)
+	Disciplina = models.ForeignKey(Disciplina,verbose_name="Disciplina",null=True)
+	
+	def __unicode__(self):
+		return "%s - %s - %s" % (self.Estrutura.Nome,self.Periodo.Nome,self.Disciplina.Nome)
+		
+class TurmaDisciplina (models.Model):
+	Turma = models.ForeignKey(Turma,verbose_name="Turma",null=True)
+	Estrutura = models.ForeignKey(Estrutura,verbose_name="Estrutura",null=True)
+	Periodo = models.ForeignKey(Periodo,verbose_name="Periodo",null=True)
+	Disciplina = models.ForeignKey(Disciplina,verbose_name="Disciplina",null=True)
+	
+	def __unicode__(self):
+		return "%s - %s - %s - %s" (self.Turma.Descricao,self.Estrutura.Nome,self.Periodo.Nome,self.Disciplina.Nome)
 	
 	
 	

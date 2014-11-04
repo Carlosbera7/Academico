@@ -8,6 +8,21 @@ from models import Cordenador
 from models import Disciplina
 from models import Professor
 from models import Periodo
+from models import Estrutura
+from models import Horario
+from models import EstruturaDisciplina
+from models import TurmaDisciplina
+
+#class DisciplinaInline(admin.TabularInline):
+	#model = Disciplina
+
+class EstruturaAdmin(admin.ModelAdmin):
+	list_display = ['Nome']
+	list_filter = ['Nome']
+	search_fields = ['Nome']
+	save_as = True
+	
+	#inlines = [DisciplinaInline]
 
 class CursoAdmin(admin.ModelAdmin):
 	list_display = ['Nome']
@@ -34,23 +49,48 @@ class DisciplinaAdmin(admin.ModelAdmin):
 	save_as = True
 	
 class AlunoAdmin(admin.ModelAdmin):
-	list_display = ['Matricula']
-	list_filter = ['Matricula']
-	search_fields = ['Matricula']
+	list_display = ['Tipo','Matricula']
+	list_filter = ['Tipo','Matricula']
+	search_fields = ['Tipo','Matricula']
 	save_as = True
 	
 class ProfessorAdmin(admin.ModelAdmin):
-	list_display = ['Codigo']
-	list_filter = ['Codigo']
-	search_fields = ['Codigo']
+	list_display = ['Tipo','Codigo']
+	list_filter = ['Tipo','Codigo']
+	search_fields = ['Tipo','Codigo']
 	save_as = True
 	
 class CordenadorAdmin(admin.ModelAdmin):
-	list_display = ['Cadastro']
-	list_filter = ['Cadastro']
-	search_fields = ['Cadastro']
+	list_display = ['Tipo','Cadastro']
+	list_filter = ['Tipo','Cadastro']
+	search_fields = ['Tipo','Cadastro']
 	save_as = True
 	
+
+	
+class HorarioAdmin(admin.ModelAdmin):
+	list_display = ['Nome']
+	list_filter = ['Nome']
+	search_fields = ['Nome']
+	save_as = True
+	
+class PeriodoAdmin(admin.ModelAdmin):
+	list_display = ['Nome']
+	list_filter = ['Nome']
+	search_fields = ['Nome']
+	save_as = True
+	
+class EstruturaDisciplinaAdmin(admin.ModelAdmin):
+	list_display = ['Estrutura','Disciplina','Periodo']
+	list_filter = ['Estrutura']
+	search_fields = ['Estrutura']
+	save_as = True
+	
+class TurmaDisciplinaAdmin(admin.ModelAdmin):
+	list_display = ['Turma','Estrutura','Disciplina','Periodo']
+	list_filter = ['Turma']
+	search_fields = ['Turma']
+	save_as = True
 	
 # Register your models here.
 admin.site.register(Curso,CursoAdmin)
@@ -60,3 +100,8 @@ admin.site.register(Disciplina,DisciplinaAdmin)
 admin.site.register(Aluno,AlunoAdmin)
 admin.site.register(Professor,ProfessorAdmin)
 admin.site.register(Cordenador,CordenadorAdmin)
+admin.site.register(Estrutura,EstruturaAdmin)
+admin.site.register(Horario,HorarioAdmin)
+admin.site.register(Periodo,PeriodoAdmin)
+admin.site.register(EstruturaDisciplina,EstruturaDisciplinaAdmin)
+admin.site.register(TurmaDisciplina,TurmaDisciplinaAdmin)
