@@ -12,17 +12,20 @@ from models import Estrutura
 from models import Horario
 from models import EstruturaDisciplina
 from models import TurmaDisciplina
+from models import TurmaAluno
+from models import DisciplinaAluno
+from models import TurmaDisciplinaHorario
 
-#class DisciplinaInline(admin.TabularInline):
-	#model = Disciplina
+#class EstruturaInline(admin.TabularInline):
+	#model = Estrutura
 
 class EstruturaAdmin(admin.ModelAdmin):
-	list_display = ['Nome']
+	list_display = ['Nome','Disciplina']
 	list_filter = ['Nome']
 	search_fields = ['Nome']
 	save_as = True
 	
-	#inlines = [DisciplinaInline]
+	#inlines = [EstruturaInline]
 
 class CursoAdmin(admin.ModelAdmin):
 	list_display = ['Nome']
@@ -48,11 +51,15 @@ class DisciplinaAdmin(admin.ModelAdmin):
 	search_fields = ['Nome']
 	save_as = True
 	
+
+	
 class AlunoAdmin(admin.ModelAdmin):
 	list_display = ['Tipo','Matricula']
 	list_filter = ['Tipo','Matricula']
 	search_fields = ['Tipo','Matricula']
 	save_as = True
+	
+	
 	
 class ProfessorAdmin(admin.ModelAdmin):
 	list_display = ['Tipo','Codigo']
@@ -69,9 +76,9 @@ class CordenadorAdmin(admin.ModelAdmin):
 
 	
 class HorarioAdmin(admin.ModelAdmin):
-	list_display = ['Nome']
-	list_filter = ['Nome']
-	search_fields = ['Nome']
+	list_display = ['Inicio','Fim']
+	list_filter = ['Inicio']
+	search_fields = ['Inicio']
 	save_as = True
 	
 class PeriodoAdmin(admin.ModelAdmin):
@@ -81,15 +88,44 @@ class PeriodoAdmin(admin.ModelAdmin):
 	save_as = True
 	
 class EstruturaDisciplinaAdmin(admin.ModelAdmin):
-	list_display = ['Estrutura','Disciplina','Periodo']
+	list_display = ['Estrutura','Curso','Periodo']
 	list_filter = ['Estrutura']
 	search_fields = ['Estrutura']
 	save_as = True
 	
 class TurmaDisciplinaAdmin(admin.ModelAdmin):
-	list_display = ['Turma','Estrutura','Disciplina','Periodo']
+	list_display = ['Turma','Estrutura',]
 	list_filter = ['Turma']
 	search_fields = ['Turma']
+	save_as = True
+	
+#class TurmaAlunoInline(admin.TabularInline):
+	#model = Aluno
+	
+class TurmaAlunoAdmin(admin.ModelAdmin):
+	list_display = ['Turma','Aluno']
+	list_filter = ['Turma']
+	search_fields = ['Turma']
+	save_as = True
+	
+	#inlines = [TurmaAlunoInline]
+	
+class DisciplinaAlunoAdmin(admin.ModelAdmin):
+	list_display = ['Aluno','Disciplina']
+	list_filter = ['Aluno']
+	search_fields = ['Aluno']
+	save_as = True
+	
+class TurmaDisciplinaHorarioAdmin(admin.ModelAdmin):
+	list_display = ['Turma','Disciplina','Horario','Professor']
+	list_filter = ['Turma']
+	search_fields = ['Turma']
+	save_as = True
+	
+class SemestreAdmin(admin.ModelAdmin):
+	list_display = ['Ano','Nome']
+	list_filter = ['Ano']
+	search_fields = ['Ano']
 	save_as = True
 	
 # Register your models here.
@@ -105,3 +141,7 @@ admin.site.register(Horario,HorarioAdmin)
 admin.site.register(Periodo,PeriodoAdmin)
 admin.site.register(EstruturaDisciplina,EstruturaDisciplinaAdmin)
 admin.site.register(TurmaDisciplina,TurmaDisciplinaAdmin)
+admin.site.register(TurmaAluno,TurmaAlunoAdmin)
+admin.site.register(DisciplinaAluno,DisciplinaAlunoAdmin)
+admin.site.register(TurmaDisciplinaHorario,TurmaDisciplinaHorarioAdmin)
+admin.site.register(Semestre,SemestreAdmin)
