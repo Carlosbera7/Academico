@@ -1,4 +1,7 @@
+#coding:utf-8
+from django.db import models
 from django.contrib import admin
+from django.forms import CheckboxSelectMultiple
 from models import Curso
 from models import Turma
 from models import Semestre
@@ -18,9 +21,12 @@ from models import TurmaDisciplinaHorario
 
 #class EstruturaInline(admin.TabularInline):
 	#model = Estrutura
+	
+#class EstruturaInline(admin.TabularInline):
+	#model = Disciplina
 
 class EstruturaAdmin(admin.ModelAdmin):
-	list_display = ['Nome','Disciplina']
+	list_display = ['Nome']
 	list_filter = ['Nome']
 	search_fields = ['Nome']
 	save_as = True
@@ -33,11 +39,16 @@ class CursoAdmin(admin.ModelAdmin):
 	search_fields = ['Nome']
 	save_as = True
 
+#class TurmaAlunoInline(admin.StakedInline):
+	#model = Aluno
+
 class TurmaAdmin(admin.ModelAdmin):
 	list_display = ['Descricao']
 	list_filter = ['Descricao']
 	search_fields = ['Descricao']
 	save_as = True
+	
+	#inlines = [TurmaAlunoInline]
 
 class PessoaAdmin(admin.ModelAdmin):
 	list_display = ['Nome','CPF','Endereco']
@@ -98,6 +109,7 @@ class TurmaDisciplinaAdmin(admin.ModelAdmin):
 	list_filter = ['Turma']
 	search_fields = ['Turma']
 	save_as = True
+	   
 	
 #class TurmaAlunoInline(admin.TabularInline):
 	#model = Aluno
@@ -117,7 +129,7 @@ class DisciplinaAlunoAdmin(admin.ModelAdmin):
 	save_as = True
 	
 class TurmaDisciplinaHorarioAdmin(admin.ModelAdmin):
-	list_display = ['Turma','Disciplina','Horario','Professor']
+	list_display = ['Turma','Horario','Professor','Disciplina']
 	list_filter = ['Turma']
 	search_fields = ['Turma']
 	save_as = True

@@ -72,11 +72,11 @@ class Periodo (models.Model):
 		
 class Estrutura (models.Model):
 	Periodo = models.ForeignKey(Periodo,verbose_name="Periodo",null=True)
-	Disciplina = models.ForeignKey(Disciplina,verbose_name="Disciplina",null=True)
+	Disciplina = models.ManyToManyField(Disciplina)                                                         #models.ForeignKey(Disciplina,verbose_name="Disciplina",null=True)
 	Nome = models.CharField('Estrutura',max_length=100,null=True)
 	
 	def __unicode__(self):
-		return "%s - %s - %s" % (self.Disciplina.Nome,self.Periodo.Nome,self.Nome)
+		return "%s" % (self.Nome)
 
 class Horario (models.Model):
 	Inicio = models.CharField('Inicio da Aula',max_length=10,null=True)
@@ -88,7 +88,7 @@ class Horario (models.Model):
 class EstruturaDisciplina (models.Model):
 	Estrutura = models.ForeignKey(Estrutura,verbose_name="Estrutura",null=True)
 	Periodo = models.ForeignKey(Periodo,verbose_name="Periodo",null=True)
-	#Disciplina = models.ForeignKey(Disciplina,verbose_name="Disciplina",null=True)
+	Disciplina = models.ForeignKey(Disciplina,verbose_name="Disciplina",null=True)
 	Curso = models.ForeignKey(Curso,verbose_name="Curso",null=True)
 	
 	def __unicode__(self):
