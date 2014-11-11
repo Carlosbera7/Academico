@@ -22,8 +22,8 @@ from models import TurmaDisciplinaHorario
 #class EstruturaInline(admin.TabularInline):
 	#model = Estrutura
 	
-#class EstruturaInline(admin.TabularInline):
-	#model = Disciplina
+class EstruturaInline(admin.TabularInline):
+	model = EstruturaDisciplina
 
 class EstruturaAdmin(admin.ModelAdmin):
 	list_display = ['Nome']
@@ -31,7 +31,11 @@ class EstruturaAdmin(admin.ModelAdmin):
 	search_fields = ['Nome']
 	save_as = True
 	
-	#inlines = [EstruturaInline]
+	inlines = [EstruturaInline]
+	
+	
+    
+
 
 class CursoAdmin(admin.ModelAdmin):
 	list_display = ['Nome']
@@ -99,13 +103,13 @@ class PeriodoAdmin(admin.ModelAdmin):
 	save_as = True
 	
 class EstruturaDisciplinaAdmin(admin.ModelAdmin):
-	list_display = ['Estrutura','Curso','Periodo']
+	list_display = ['Estrutura','Periodo']
 	list_filter = ['Estrutura']
 	search_fields = ['Estrutura']
 	save_as = True
 	
 class TurmaDisciplinaAdmin(admin.ModelAdmin):
-	list_display = ['Turma','Estrutura',]
+	list_display = ['Turma','Disciplina']
 	list_filter = ['Turma']
 	search_fields = ['Turma']
 	save_as = True
@@ -123,15 +127,15 @@ class TurmaAlunoAdmin(admin.ModelAdmin):
 	#inlines = [TurmaAlunoInline]
 	
 class DisciplinaAlunoAdmin(admin.ModelAdmin):
-	list_display = ['Aluno','Disciplina']
-	list_filter = ['Aluno']
-	search_fields = ['Aluno']
+	list_display = ['TurmaAluno','TurmaDisciplina']
+	list_filter = ['TurmaAluno']
+	search_fields = ['TurmaAluno']
 	save_as = True
 	
 class TurmaDisciplinaHorarioAdmin(admin.ModelAdmin):
-	list_display = ['Turma','Horario','Professor','Disciplina']
-	list_filter = ['Turma']
-	search_fields = ['Turma']
+	list_display = ['TurmaDisciplina','Horario','Professor']
+	list_filter = ['TurmaDisciplina']
+	search_fields = ['TurmaDisciplina']
 	save_as = True
 	
 class SemestreAdmin(admin.ModelAdmin):
