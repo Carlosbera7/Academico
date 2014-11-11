@@ -84,11 +84,11 @@ class Turma (models.Model):
 	Estrutura = models.ForeignKey(Estrutura,verbose_name="Estrutura",null=True) 
 	
 	def __unicode__(self):
-		return (self.Descricao)
+		return "%s - %s" % (self.Descricao,self.Estrutura.Curso.Nome)
 
 class Horario (models.Model):
-	Inicio = models.CharField('Inicio da Aula',max_length=10,null=True)
-	Fim = models.CharField('Fim da Aula',max_length=10,null=True)
+	Inicio = models.TimeField('Inicio da Aula',null=True)
+	Fim = models.TimeField('Fim da Aula',null=True)
 	
 	def __unicode__(self):
 		return "%s - %s" % (self.Inicio,self.Fim)
@@ -141,7 +141,7 @@ class TurmaDisciplinaHorario (models.Model):
 	Professor = models.ForeignKey(Professor,verbose_name="Professor",null=True)
 	
 	def __unicode__(self):
-		return "%s - %s" % (self.Professor.Tipo.Nome,self.TurmaDisciplina.Disciplina.Disciplina.Nome,self.TurmaDisciplina.Turma.Turma.Nome)
+		return "%s - %s - %s" % (self.Professor.Tipo.Nome,self.TurmaDisciplina.Disciplina.Disciplina.Nome,self.Horario.Inicio)
 		
 
 	

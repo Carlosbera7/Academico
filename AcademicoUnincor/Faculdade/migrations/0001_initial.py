@@ -86,8 +86,8 @@ class Migration(migrations.Migration):
             name='Horario',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('Inicio', models.CharField(max_length=10, null=True, verbose_name=b'Inicio da Aula')),
-                ('Fim', models.CharField(max_length=10, null=True, verbose_name=b'Fim da Aula')),
+                ('Inicio', models.TimeField(null=True, verbose_name=b'Inicio da Aula')),
+                ('Fim', models.TimeField(null=True, verbose_name=b'Fim da Aula')),
             ],
             options={
             },

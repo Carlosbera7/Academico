@@ -43,8 +43,8 @@ class CursoAdmin(admin.ModelAdmin):
 	search_fields = ['Nome']
 	save_as = True
 
-#class TurmaAlunoInline(admin.StakedInline):
-	#model = Aluno
+class TurmaAlunoInline(admin.TabularInline):
+	model = TurmaAluno
 
 class TurmaAdmin(admin.ModelAdmin):
 	list_display = ['Descricao']
@@ -52,7 +52,7 @@ class TurmaAdmin(admin.ModelAdmin):
 	search_fields = ['Descricao']
 	save_as = True
 	
-	#inlines = [TurmaAlunoInline]
+	inlines = [TurmaAlunoInline]
 
 class PessoaAdmin(admin.ModelAdmin):
 	list_display = ['Nome','CPF','Endereco']
